@@ -1,13 +1,13 @@
-///Arduino Sample Code
-void setup()
-{
-  Serial.begin(9600); //Set serial baud rate to 9600 bps
+#include "CO2Sensor.cc"
+
+// create sensor
+CO2Sensor co2Sensor(A0);
+
+void setup() {
+  Serial.begin(9600);
 }
-void loop()
-{
-int val;
-val=analogRead(0);//Read Gas value from analog 0
-int pollution = map(val, 0, 1023, 20, 2000);
-Serial.println(val,DEC);//Print the value to serial port
-delay(100);
+void loop() {
+  int pollution = co2Sensor.read();
+  Serial.println(pollution);
+  delay(100);
 }
