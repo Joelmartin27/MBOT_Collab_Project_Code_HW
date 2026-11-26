@@ -1,5 +1,8 @@
 #include <Arduino.h>
 
+#ifndef PHSENSOR_FILE
+#define PHSENSOR_FILE
+
 class PHsensor {
 private:
   int pin;
@@ -22,3 +25,5 @@ public:
     return pH;
   }
 };
+
+#endif

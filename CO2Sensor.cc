@@ -1,5 +1,8 @@
 #include <Arduino.h>
 
+#ifndef CO2SENSOR_FILE
+#define CO2SENSOR_FILE
+
 // define code structure for sensor
 class CO2Sensor {
 private:
@@ -17,3 +20,5 @@ public:
     return pollution;
   }
 };
+
+#endif
