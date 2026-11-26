@@ -2,75 +2,71 @@
 #include <Wire.h>
 #include <Adafruit_MotorShield.h>
 #include "Motor_Controller.h"
- 
-Adafruit_MotorShield AFMS = Adafruit_MotorShield(); 
+
+Adafruit_MotorShield AFMS = Adafruit_MotorShield();
 Adafruit_DCMotor *lMotor = AFMS.getMotor(1);
 Adafruit_DCMotor *rMotor = AFMS.getMotor(2);
 
-int time = millis();
-int delay = 1000;
-int timeSinceDelay;
 
-void Motors::motorSetup(){
+
+
+void Motors::motorSetup() {
 
   AFMS.begin();
   lMotor->setSpeed(motorSpeed);
-  rMotor ->setSpeed(motorSpeed);
+  rMotor->setSpeed(motorSpeed);
   time = millis();
   timeSinceDelay = millis();
-
 }
 
-void Motors::motorLoop(){
+void Motors::motorLoop() {
   timeSinceDelay = millis();
-Motors::wait();
-Motors::forward();
-Motors::wait();
-Motors::wait();
-Motors::reverse();
-Motors::wait();
-Motors::stop();
+  wait();
+  forward();
+  wait();
+  wait();
+  reverse();
+  wait();
+  stop();
 }
 
-Motors::wait(){
-  if(timeSinceDelay - time <= delay){
-    return
-  }else{
-    timeSinceDelay = millis();
-  }
+bool Motors::wait() {
+  if (time - timeSinceDelay <= delay) return true;
+  timeSinceDelay = millis();
+  return false;
 }
 
-Motors::forward(){
+void Motors::forward() {
   lMotor->run(FORWARD);
   rMotor->run(FORWARD);
 }
 
-Motors::reverse(){
+void Motors::reverse() {
   lMotor->run(BACKWARD);
   rMotor->run(BACKWARD);
 }
 
-Motors::pivotLeft(){
+void Motors::pivotLeft() {
   lMotor->run(BACKWARD);
   rMotor->run(FORWARD);
 }
 
-Motors::pivotRight(){
+void Motors::pivotRight() {
   lMotor->run(FORWARD);
   rMotor->run(BACKWARD);
 }
 
-Motors::turnLeft(){
+void Motors::turnLeft() {
   lMotor->setSpeed(0);
   rMotor->run(FORWARD);
 }
 
-Motors::turnRight(){
+void Motors::turnRight() {
   lMotor->run(FORWARD);
   rMotor->setSpeed(0);
 }
 
-Motors::stop(){
+void Motors::stop() {
   lMotor->setSpeed(0);
   rMotor->setSpeed(0);
 }
