@@ -1,17 +1,17 @@
-// class Motor_Left{
-  
-//   public:
+class Motors {
 
-//     void setup();
-//     turnLeft();
-//     turnRight();
-//     rotateLeft();
-//     rotateRight();
-//     forward();
-//     reverse();
+  void motorSetup();
+  void motorLoop(motorSpeed);
+  wait();
+  turnLeft();
+  turnRight();
+  pivotLeft();
+  pivotRight();
+  forward();
+  reverse();
+  stop();
 
-//   private:
 
-//     int mLeftPin = 5; //Ground to pin4
-//     int mRightPin = 6; //Ground to pin7
-// };
+private:
+  int motorSpeed = 255;
+};
